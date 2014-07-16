@@ -1,16 +1,10 @@
 require "formula"
 
-class Python < Formula
+class WidePython < Formula
   homepage "http://www.python.org"
   head "http://hg.python.org/cpython", :using => :hg, :branch => "2.7"
   url "http://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz"
   sha1 "511960dd78451a06c9df76509635aeec05b2051a"
-
-  bottle do
-    sha1 "11c4ad33f1a0ec2a9dee025f246e67a0783e8bdb" => :mavericks
-    sha1 "522a99761335205b29f348dd9861dc6630a29a35" => :mountain_lion
-    sha1 "07ba7ee28c2d6a6d8fcc613b27574090f0e2f27e" => :lion
-  end
 
   option :universal
   option "quicktest", "Run `make quicktest` after the build (for devs; may fail)"
@@ -60,12 +54,6 @@ class Python < Formula
   # The HOMEBREW_PREFIX location of site-packages.
   def site_packages
     HOMEBREW_PREFIX/"lib/python2.7/site-packages"
-  end
-
-  # setuptools remembers the build flags python is built with and uses them to
-  # build packages later. Xcode-only systems need different flags.
-  def pour_bottle?
-    MacOS::CLT.installed?
   end
 
   def install
